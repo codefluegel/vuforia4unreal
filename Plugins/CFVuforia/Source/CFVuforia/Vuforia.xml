@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- steps to add to build additions -->
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- init section is always evaluated once per architecture -->
+	<init>
+		<log text="Vuforia init"/>
+		<setStringFromProperty result="VuforiaLicenseKey" ini="Engine" section="/Script/CFVuforia.VuforiaSettings" property="AppLicenseKey" />
+		<setBoolIsEqual result="vuforialicensenotset" arg1="$S(VuforiaLicenseKey)" arg2=""/>
+		<if condition="vuforialicensenotset">
+			<true>
+				<log text="Vuforia LicenseKey: VuforiaLicenseKey"/>
+				<log text="Vuforia LicenseKey: $S(VuforiaLicenseKey)"/>
+				<log text="Vuforia License Key not set, please set it and rebuild"/>
+				<setString result="Output" value="Vuforia License Key not set, please set it and rebuild"/>
+		
+				<return/>
+	  		</true>
+	   	</if>
+		
+		<setBool result="bSupported" value="false"/>
+		<isArch arch="armeabi-v7a">
+			<setBool result="bSupported" value="true"/>
+		</isArch>
+		<log text="Vuforia LicenseKey: $S(VuforiaLicenseKey)"/>
+	</init>
+
+	<!-- optional files or directories to copy to Intermediate/Android/APK -->
+	<resourceCopies>
+		<isArch arch="armeabi-v7a">
+			<copyFile src="$S(PluginDir)/../../VuforiaSDK/build/lib/armeabi-v7a/libVuforia.so"
+						dst="$S(BuildDir)/libs/armeabi-v7a/libVuforia.so" />
+		</isArch>
+		
+		<copyFile src="$S(PluginDir)/../../VuforiaSDK/build/java/vuforia/Vuforia.jar"
+					dst="$S(BuildDir)/libs/Vuforia.jar" />
+		<copyFile src="$S(PluginDir)/../../Assets/StonesAndChips.xml"
+					dst="$S(BuildDir)/assets/StonesAndChips.xml" />
+		<copyFile src="$S(PluginDir)/../../Assets/StonesAndChips.dat"
+					dst="$S(BuildDir)/assets/StonesAndChips.dat" />
+	</resourceCopies>
+
+	<!-- optional updates applied to AndroidManifest.xml -->
+	<androidManifestUpdates>
+		<addFeature android:name="android.hardware.camera" />
+		<addPermission android:name="android.permission.CAMERA" />
+	</androidManifestUpdates>
+	
+	<!-- optional additions to the GameActivity imports in GameActivity.java -->
+	<gameActivityImportAdditions>
+		<insert>
+import com.vuforia.Vuforia;
+		</insert>
+	</gameActivityImportAdditions>
+	<!-- optional additions to GameActivity onStart in GameActivity.java -->
+	<gameActivityOnCreateAdditions>
+		<insert>
+		Vuforia.setInitParameters(this, Vuforia.GL_30, </insert><insertValue value="&quot;$S(VuforiaLicenseKey)&quot;"/><insert>);
+		int vuforia_init_progress = 0;
+		do
+		{
+			vuforia_init_progress = Vuforia.init();
+		} while (vuforia_init_progress &gt;= 0 &amp;&amp; vuforia_init_progress &lt; 100);
+		android.util.Log.d("CFVuforiaLog", "initialized: " + vuforia_init_progress + "%");
+		</insert>
+	</gameActivityOnCreateAdditions>
+	<!-- optional additions to GameActivity onResume in GameActivity.java
+	<gameActivityOnResumeAdditions>
+	</gameActivityOnResumeAdditions> -->
+	<!-- optional additions to GameActivity onPause in GameActivity.java
+	<gameActivityOnPauseAdditions>
+	</gameActivityOnPauseAdditions> -->
+	<!-- optional additions to GameActivity onDestroy in GameActivity.java
+	<gameActivityOnDestroyAdditions>
+	</gameActivityOnDestroyAdditions> -->
+	<!-- optional libraries to load in GameActivity.java before libUE4.so -->
+	<soLoadLibrary>
+		<if condition="bSupported">
+			<true>
+				<loadLibrary name="Vuforia" failmsg="Failed to load Vuforia library" />
+			</true>
+		</if>
+	</soLoadLibrary>
+</root>

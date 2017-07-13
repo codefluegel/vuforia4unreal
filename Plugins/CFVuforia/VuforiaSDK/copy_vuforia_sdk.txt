@@ -1,0 +1,3 @@
+Copy the content of the Vuforia SDK (vuforia-sdk-android-6-2-10) inside this folder.
+The directory should look like this:
+	CFVuforia/VuforiaSDK/build/[include, java, lib]

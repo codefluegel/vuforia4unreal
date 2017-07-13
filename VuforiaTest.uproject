@@ -1,0 +1,79 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "4.16",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "VuforiaTest",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"ProceduralMeshComponent"
+			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "AlembicImporter",
+			"Enabled": false
+		},
+		{
+			"Name": "AndroidMedia",
+			"Enabled": false
+		},
+		{
+			"Name": "AndroidMoviePlayer",
+			"Enabled": false
+		},
+		{
+			"Name": "AppleMoviePlayer",
+			"Enabled": false
+		},
+		{
+			"Name": "ArchVisCharacter",
+			"Enabled": false
+		},
+		{
+			"Name": "AudioCapture",
+			"Enabled": false
+		},
+		{
+			"Name": "AvfMedia",
+			"Enabled": false
+		},
+		{
+			"Name": "CableComponent",
+			"Enabled": false
+		},
+		{
+			"Name": "CharacterAI",
+			"Enabled": false
+		},
+		{
+			"Name": "CodeLiteSourceCodeAccess",
+			"Enabled": false
+		},
+		{
+			"Name": "OculusRift",
+			"Enabled": false
+		},
+		{
+			"Name": "OculusLibrary",
+			"Enabled": false
+		},
+		{
+			"Name": "OculusInput",
+			"Enabled": false
+		},
+		{
+			"Name": "GearVR",
+			"Enabled": false
+		},
+		{
+			"Name": "SteamVR",
+			"Enabled": false
+		}
+	]
+}

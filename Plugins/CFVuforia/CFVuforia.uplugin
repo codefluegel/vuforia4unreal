@@ -1,0 +1,19 @@
+{
+    "FileVersion" : 3,
+    "FriendlyName" : "Vuforia Plugin",
+    "Version" : 1,
+    "VersionName": "1.0",
+    "Description" : "Provides a basic integration of the Vuforia AR Framework with the Unreal Engine.",
+    "Category" : "AR.Vuforia",
+    "CreatedBy" : "Codefluegel GmbH",
+    "CreatedByURL" : "https://codefluegel.com",
+    "CanContainContent" : "true",
+    "Modules" :
+    [
+        {
+            "Name" : "CFVuforia",
+            "Type" : "Developer",
+            "LoadingPhase" : "PreDefault"
+        } 
+    ]
+}
