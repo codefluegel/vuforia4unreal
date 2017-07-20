@@ -43,6 +43,7 @@ AVuforiaActor::AVuforiaActor()
 
 	mVideoPlane = CreateDefaultSubobject<UVuforiaVideoPlaneComponent>(TEXT("GeneratedMesh"));
 	mVideoPlane->Create();
+	mVideoPlane->AttachToComponent(GetCameraComponent(), FAttachmentTransformRules::KeepRelativeTransform);
 	AddInstanceComponent(mVideoPlane);
 }
 
